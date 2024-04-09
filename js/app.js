@@ -23,17 +23,22 @@ formCreate.addEventListener('submit', (e) =>{
 function createTodos(todoArr){
     listGroupTodo.innerHTML = ""
     todoArr.forEach(({id, text}) => {
+        console.log(id);
+        console.log(text);
         const li = document.createElement('li');
         li.classList.add('list-group-item');
-        li.innerHTML = `<p>${item}</p>
+        // li.classList.add('d-flex');
+        // li.classList.add('justify-content-between');
+        // li.classList.add('align-items-center');
+        li.innerHTML = `<p>${text}</p>
                         <div>
-                            <img src="./img/delete.svg" onclick="deletTodo(${id})" alt="delete">
-                        </div>;`
+                            <img src="./img/delete.svg" width='25' onclick="deletTodo(${id})" alt="delete">
+                        </div>`
         listGroupTodo.appendChild(li)
     });
 }
 
-// function deletTodo(itemId){
-//     todoArr = todoArr.filter(({id}) => id !== itemId);
-//     createTodos(todoArr)
-// }
+function deletTodo(itemId){
+    todoArr = todoArr.filter(({id}) => id !== itemId);
+    createTodos(todoArr)
+}
