@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo LIST</title>
+    <!-- BOOTSTRAP CSS-->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="my-5 text-center">
+      <h1 class="display-2 text-success">
+        Todo List
+      </h1>
+
+    </header>
+    <main class="container">
+      <form id="form-create" class="mb-3">
+        <div class="mb-3">
+          <input
+            id="inputCreate"
+            type="text"
+            class="mb-1 form-control"
+            placeholder="Enter todo..."
+            autocomplete="off"
+            required
+            />
+            <span id="message-create" class="text-danger d-block"></span>
+          </div>
+          <button id="add_btn" class="btn btn-outline-primary d-block ms-auto">Add</button>
+        </form>
+
+      <ul id="list-group-todo" class="list-group d-flex justify-content-between">
+      </ul>
+
+    </main>
+
+    <!-- SCRTIP -->
+    <!-- BOOSTRAP JS -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
