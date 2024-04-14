@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Todo LIST</title>
+    <title>Todo List</title>
     <!-- BOOTSTRAP CSS-->
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <!-- CSS -->
@@ -12,6 +12,10 @@
   </head>
   <body>
     <header class="my-5 text-center">
+      <h4 id="full-day"></h4>
+      <div class="time-container">
+        <span id="title_time"></span>
+      </div>
       <h1 class="display-2 text-success">
         Todo List
       </h1>
@@ -33,8 +37,39 @@
           <button id="add_btn" class="btn btn-outline-primary d-block ms-auto">Add</button>
         </form>
       <ul id="list-group-todo" class="list-group d-flex justify-content-between">
+        
       </ul>
 
+            <!-- modal -->
+            <div id="modal" class="modal-todo hidden">
+              <div class="card">
+                <div
+                  class="card-header d-flex justify-content-between align-items-center"
+                >
+                  <h5>Change This Todo</h5>
+                  <img id="close" src="img/close.svg" alt="" width="25" height="25" />
+                </div>
+                <div class="card-body">
+                  <form id="form-edit" class="mb-3">
+                    <div class="mb-3">
+                      <input
+                        id="inputEdit"
+                        type="text"
+                        class="mb-1 form-control"
+                        placeholder="Type todo..."
+                        autocomplete="off"
+                      />
+                      <span id="message-edit" class="text-danger"></span>
+                    </div>
+                    <button class="btn btn-outline-success d-block ms-auto">
+                      Save Changes
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+      
+          <div id="overlay" class="overlay hidden"></div>
     </main>
 
     <!-- SCRTIP -->
