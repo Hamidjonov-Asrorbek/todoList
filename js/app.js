@@ -78,19 +78,29 @@ function deletTodo(itemId){
 function editTodo(itemId){
     open();
 
-    formEdit.addEventListener("submit", (e) =>{
-        e.preventDefault();
-        todoArr = todoArr.map((item) =>{
-            if(item.id === itemId){
-                return {...item, text: inputEdit.value.trim()};
+    function editForm(e){
+            e.preventDefault();
+            if(inputEdit.value.trim().length){
+                todoArr = todoArr.map((item) =>{
+                    if(item.id === itemId){
+                        return {...item, text: inputEdit.value.trim()};
+                    }
+                    return item;
+                });
+                close();
+                createTodos(todoArr);
+                inputEdit.value = ''
+                localStorage.setItem("todos", JSON.stringify(todoArr));
+                e.target.reset();
             }
-            return item;
-        });
-        close();
-        createTodos(todoArr);
-        inputEdit.value = ''
-        localStorage.setItem("todos", JSON.stringify(todoArr));
-    });
+            else{
+                inputEdit.value = ''
+                ShowError("message-edit", "Please enter todo")
+            }
+            return formEdit.removeEventListener("submit", editForm)
+        }
+
+    formEdit.addEventListener("submit", editForm);
     
 };
 
