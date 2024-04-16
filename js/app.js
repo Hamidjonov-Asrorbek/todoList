@@ -13,8 +13,9 @@ const add_btn = document.getElementById('add_btn');
 
 
 
+let todoArr = JSON?.parse(localStorage.getItem('todos')) ? JSON?.parse(localStorage.getItem('todos')) : [];
+createTodos(todoArr);
 
-let todoArr = [];
 
 // show error message
 function ShowError(where, message){
@@ -27,17 +28,17 @@ function ShowError(where, message){
 }
 
 // form create submit
-
 formCreate.addEventListener('submit', (e) =>{
     e.preventDefault();
     
     let todo = {
         id: Math.floor(Math.random()*1000000),
         text: inputCreate.value.trim(),
-        time: getTime()
+        time: getTime(),
     }
     if(todo.text.length){
         todoArr.push(todo);
+        localStorage.setItem("todos", JSON.stringify(todoArr));
         inputCreate.value = ""
         createTodos(todoArr);
     }
@@ -47,18 +48,16 @@ formCreate.addEventListener('submit', (e) =>{
     
 })
 
-
-
 // create todo
 
 function createTodos(data){
     listGroupTodo.innerHTML = ""
-    todoArr.forEach(({id, text}) => {
+    todoArr.forEach(({id, text, time}) => {
         const li = document.createElement('li');
         li.classList.add('list-group-item');
         li.innerHTML = `<p>${text}</p>
                         <div class='align-items-center'>
-                            <span class='opacity-50 me-2'>${getTime()}</span>
+                            <span class='opacity-50 me-2'>${time}</span>
                             <img src="./img/edit.svg" width='25' onclick="editTodo(${id})" alt="edit">
                             <img src="./img/delete.svg" width='25' onclick="deletTodo(${id})" alt="delete">
                         </div>`
@@ -67,12 +66,11 @@ function createTodos(data){
     });
 }
 
-
-
 // delete todo
 function deletTodo(itemId){
     todoArr = todoArr.filter(({id}) => id !== itemId);
     createTodos(todoArr)
+    localStorage.setItem("todos", JSON.stringify(todoArr));
 }
 
 // edit todo
@@ -89,9 +87,11 @@ function editTodo(itemId){
             return item;
         });
         close();
-        createTodos();
+        createTodos(todoArr);
         inputEdit.value = ''
+        localStorage.setItem("todos", JSON.stringify(todoArr));
     });
+    
 };
 
 closeEl.addEventListener("click", () =>{
@@ -104,7 +104,6 @@ overlay.addEventListener("click", () =>{
 function open(){
     modal.classList.remove('hidden');
     overlay.classList.remove('hidden');
-    
 }
 
 function close(){
